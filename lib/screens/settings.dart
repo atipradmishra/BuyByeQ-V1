@@ -13,6 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart';
 import '../common/drawer/custom_drawer.dart';
+import '../database/catagorymodel.dart';
+import '../database/category_curd.dart';
 import '../database/connections.dart';
 import '../settings/settings.dart';
 import 'categorypage.dart';
@@ -27,6 +29,25 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  @override
+
+  List<MenuCategory> category = [];
+  Categorycurdmap _categorytablemap = Categorycurdmap();
+  void selectallcategories() async {
+    try {
+      List<MenuCategory> data = await _categorytablemap.selectall();
+      category.clear();
+      category.addAll(data);
+      setState(() {});
+    } catch (error) {
+      print('Error fetching Categories');
+    }
+  }
+
+  void initState() {
+    selectallcategories();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -63,13 +84,16 @@ class _SettingsPageState extends State<SettingsPage> {
 
       await db.transaction((txn) async {
         for (final row in fields) {
-          await txn.rawInsert(
-              'INSERT INTO MenuItem (MenuItemName,Type,DiscountPercentage,Price) VALUES(?, ?,?, ?)',
-              [row[0], row[1],row[2],row[3]]
+          var value_to_check = row[4];
+          await txn.rawQuery(
+              '''INSERT INTO MenuCategory (MenuCategoryName) VALUES(?)
+              ON CONFLICT (MenuCategoryName) DO NOTHING;
+              ''',
+            [row[4]]
           );
           await txn.rawInsert(
-              'INSERT INTO MenuCategory (MenuCategoryName) VALUES(?)',
-              [row[4]]
+              'INSERT INTO MenuItem (MenuItemName,Type,DiscountPercentage,Price) VALUES(?, ?,?, ?)',
+              [row[0].toString(), row[1].toString().toLowerCase(),row[2],row[3]]
           );
           // await txn.rawInsert(
           //     '''INSERT INTO ItemCategoryMapping (MenuItemId)
