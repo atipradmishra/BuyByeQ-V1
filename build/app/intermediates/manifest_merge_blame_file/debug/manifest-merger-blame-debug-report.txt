@@ -1,0 +1,215 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.buybyeq"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:7:5-67
+15-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:7:22-64
+16    <uses-permission android:name="android.permission.BLUETOOTH" />
+16-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:8:5-68
+16-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:8:22-65
+17    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+17-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:9:5-74
+17-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:9:22-71
+18    <uses-permission android:name="android.permission.ACCES_FINE_LOCATION" />
+18-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:10:5-78
+18-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:10:22-75
+19    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+19-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:11:5-85
+19-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\debug\AndroidManifest.xml:11:22-82
+20    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+20-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:3:5-75
+20-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:3:22-73
+21    <uses-permission
+21-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:4:5-5:38
+22        android:name="android.permission.READ_EXTERNAL_STORAGE"
+22-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:4:22-77
+23        android:maxSdkVersion="32" />
+23-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:5:9-35
+24    <uses-permission android:name="android.permission.SEND_SMS" />
+24-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:6:5-67
+24-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:6:22-64
+25    <uses-permission android:name="android.permission.READ_SMS" />
+25-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:7:5-67
+25-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:7:22-64
+26    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+26-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:8:5-70
+26-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:8:22-67
+27
+28    <queries>
+28-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:41:5-62:15
+29
+30        <!-- If your app opens https URLs -->
+31        <intent>
+31-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:43:9-46:18
+32            <action android:name="android.intent.action.VIEW" />
+32-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:44:13-65
+32-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:44:21-62
+33
+34            <data android:scheme="https" />
+34-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:13-44
+34-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:19-41
+35        </intent>
+36        <!-- If your app makes calls -->
+37        <intent>
+37-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:48:9-51:18
+38            <action android:name="android.intent.action.DIAL" />
+38-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:49:13-65
+38-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:49:21-62
+39
+40            <data android:scheme="tel" />
+40-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:13-44
+40-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:19-41
+41        </intent>
+42        <!-- If your sends SMS messages -->
+43        <intent>
+43-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:53:9-56:18
+44            <action android:name="android.intent.action.SENDTO" />
+44-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:54:13-67
+44-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:54:21-64
+45
+46            <data android:scheme="smsto" />
+46-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:13-44
+46-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:19-41
+47        </intent>
+48        <!-- If your app sends emails -->
+49        <intent>
+49-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:58:9-61:18
+50            <action android:name="android.intent.action.SEND" />
+50-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:59:13-65
+50-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:59:21-62
+51
+52            <data android:mimeType="*/*" />
+52-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:13-44
+53        </intent>
+54        <intent>
+54-->[:file_picker] D:\BuyByeQ-main\BuyByeQ-main\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-16:18
+55            <action android:name="android.intent.action.GET_CONTENT" />
+55-->[:file_picker] D:\BuyByeQ-main\BuyByeQ-main\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-72
+55-->[:file_picker] D:\BuyByeQ-main\BuyByeQ-main\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:13:21-69
+56
+57            <data android:mimeType="*/*" />
+57-->D:\BuyByeQ-main\BuyByeQ-main\android\app\src\main\AndroidManifest.xml:45:13-44
+58        </intent>
+59    </queries>
+60
+61    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+61-->[:bluetooth_print] D:\BuyByeQ-main\BuyByeQ-main\build\bluetooth_print\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-76
+61-->[:bluetooth_print] D:\BuyByeQ-main\BuyByeQ-main\build\bluetooth_print\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-73
+62    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+62-->[:bluetooth_print] D:\BuyByeQ-main\BuyByeQ-main\build\bluetooth_print\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-73
+62-->[:bluetooth_print] D:\BuyByeQ-main\BuyByeQ-main\build\bluetooth_print\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-70
+63    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+63-->[:bluetooth_print] D:\BuyByeQ-main\BuyByeQ-main\build\bluetooth_print\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-79
+63-->[:bluetooth_print] D:\BuyByeQ-main\BuyByeQ-main\build\bluetooth_print\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-76
+64
+65    <application
+66        android:name="android.app.Application"
+67        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+67-->[androidx.core:core:1.8.0] C:\Users\AIT\.gradle\caches\transforms-3\270e9501dde0430a83746f97bf9ab544\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+68        android:debuggable="true"
+69        android:icon="@mipmap/launcher_icon"
+70        android:label="BuyByeQ" >
+71        <activity
+72            android:name="com.example.buybyeq.MainActivity"
+73            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+74            android:exported="true"
+75            android:hardwareAccelerated="true"
+76            android:launchMode="singleTop"
+77            android:theme="@style/LaunchTheme"
+78            android:windowSoftInputMode="adjustResize" >
+79
+80            <!--
+81                 Specifies an Android theme to apply to this Activity as soon as
+82                 the Android process has started. This theme is visible to the user
+83                 while the Flutter UI initializes. After that, this theme continues
+84                 to determine the Window background behind the Flutter UI.
+85            -->
+86            <meta-data
+87                android:name="io.flutter.embedding.android.NormalTheme"
+88                android:resource="@style/NormalTheme" />
+89
+90            <intent-filter>
+91                <action android:name="android.intent.action.MAIN" />
+92
+93                <category android:name="android.intent.category.LAUNCHER" />
+94            </intent-filter>
+95        </activity>
+96        <!--
+97             Don't delete the meta-data below.
+98             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+99        -->
+100        <meta-data
+101            android:name="flutterEmbedding"
+102            android:value="2" />
+103
+104        <provider
+104-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+105            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+105-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+106            android:authorities="com.example.buybyeq.flutter.image_provider"
+106-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+107            android:exported="false"
+107-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+108            android:grantUriPermissions="true" >
+108-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+109            <meta-data
+109-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+110                android:name="android.support.FILE_PROVIDER_PATHS"
+110-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+111                android:resource="@xml/flutter_image_picker_file_paths" />
+111-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+112        </provider>
+113
+114        <activity
+114-->[:url_launcher_android] D:\BuyByeQ-main\BuyByeQ-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+115            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+115-->[:url_launcher_android] D:\BuyByeQ-main\BuyByeQ-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+116            android:exported="false"
+116-->[:url_launcher_android] D:\BuyByeQ-main\BuyByeQ-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+117            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+117-->[:url_launcher_android] D:\BuyByeQ-main\BuyByeQ-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+118
+119        <provider
+119-->[:printing] D:\BuyByeQ-main\BuyByeQ-main\build\printing\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+120            android:name="net.nfet.flutter.printing.PrintFileProvider"
+120-->[:printing] D:\BuyByeQ-main\BuyByeQ-main\build\printing\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-71
+121            android:authorities="com.example.buybyeq.flutter.printing"
+121-->[:printing] D:\BuyByeQ-main\BuyByeQ-main\build\printing\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-68
+122            android:exported="false"
+122-->[:printing] D:\BuyByeQ-main\BuyByeQ-main\build\printing\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+123            android:grantUriPermissions="true" >
+123-->[:printing] D:\BuyByeQ-main\BuyByeQ-main\build\printing\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+124            <meta-data
+124-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+125                android:name="android.support.FILE_PROVIDER_PATHS"
+125-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+126                android:resource="@xml/flutter_printing_file_paths" />
+126-->[:image_picker_android] D:\BuyByeQ-main\BuyByeQ-main\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+127        </provider>
+128
+129        <uses-library
+129-->[androidx.window:window:1.0.0-beta04] C:\Users\AIT\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+130            android:name="androidx.window.extensions"
+130-->[androidx.window:window:1.0.0-beta04] C:\Users\AIT\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+131            android:required="false" />
+131-->[androidx.window:window:1.0.0-beta04] C:\Users\AIT\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+132        <uses-library
+132-->[androidx.window:window:1.0.0-beta04] C:\Users\AIT\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+133            android:name="androidx.window.sidecar"
+133-->[androidx.window:window:1.0.0-beta04] C:\Users\AIT\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+134            android:required="false" />
+134-->[androidx.window:window:1.0.0-beta04] C:\Users\AIT\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+135    </application>
+136
+137</manifest>

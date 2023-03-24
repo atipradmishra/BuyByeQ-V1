@@ -1,0 +1,27 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.bluetooth_print" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml
+7        android:targetSdkVersion="21" />
+7-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml
+8
+9    <uses-permission android:name="android.permission.BLUETOOTH" />
+9-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:3:5-67
+9-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:3:22-65
+10    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+10-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:4:5-74
+10-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:4:22-71
+11    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+11-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:5:5-75
+11-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:5:22-73
+12    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+12-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:6:5-72
+12-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:6:22-70
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:7:5-78
+13-->C:\Users\AIT\AppData\Local\Pub\Cache\hosted\pub.dev\bluetooth_print-4.3.0\android\src\main\AndroidManifest.xml:7:22-76
+14
+15</manifest>
