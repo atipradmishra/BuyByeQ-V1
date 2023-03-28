@@ -1,20 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:buybyeq/screens/resturabtdetail.dart';
+import 'dart:typed_data';
+import 'package:buybyeq/screens/resturantdetail.dart';
 import 'package:buybyeq/screens/rolepage.dart';
 import 'package:buybyeq/screens/userspage.dart';
-import 'package:buybyeq/screens/xlsuplode.dart';
 import 'package:csv/csv.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:buybyeq/common/appBar/apbar.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../common/drawer/custom_drawer.dart';
-import '../database/catagorymodel.dart';
-import '../database/category_curd.dart';
 import '../database/connections.dart';
 import '../settings/settings.dart';
 import 'categorypage.dart';
@@ -31,21 +32,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
 
-  List<MenuCategory> category = [];
-  Categorycurdmap _categorytablemap = Categorycurdmap();
-  void selectallcategories() async {
-    try {
-      List<MenuCategory> data = await _categorytablemap.selectall();
-      category.clear();
-      category.addAll(data);
-      setState(() {});
-    } catch (error) {
-      print('Error fetching Categories');
-    }
-  }
-
   void initState() {
-    selectallcategories();
     super.initState();
   }
   @override
@@ -83,8 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
       print(fields);
 
       await db.transaction((txn) async {
-        for (final row in fields) {
-          var value_to_check = row[4];
+        for (final row in fields.skip(1)) {
           await txn.rawQuery(
               '''INSERT INTO MenuCategory (MenuCategoryName) VALUES(?)
               ON CONFLICT (MenuCategoryName) DO NOTHING;
@@ -95,11 +81,12 @@ class _SettingsPageState extends State<SettingsPage> {
               'INSERT INTO MenuItem (MenuItemName,Type,DiscountPercentage,Price) VALUES(?, ?,?, ?)',
               [row[0].toString(), row[1].toString().toLowerCase(),row[2],row[3]]
           );
-          // await txn.rawInsert(
-          //     '''INSERT INTO ItemCategoryMapping (MenuItemId)
-          //     SELECT MenuItemId FROM MenuItem
-          //     WHERE MenuItemName == ${row[0]};
+          // await txn.rawQuery(
+          //     '''
+          //     INSERT INTO ItemCategoryMapping (MenuItemId)
+          //     VALUES ((SELECT MenuItemId FROM MenuItem WHERE MenuItemName = ${row[0].toString()})
           //    ''',
+          //   [row[4],row[0]]
           // );
         }
       });
@@ -107,6 +94,23 @@ class _SettingsPageState extends State<SettingsPage> {
       setState(() {
         _data = fields;
       });
+    }
+
+    Future<File> savePrebuiltExcelFile() async {
+      // Get the path to the app's local storage directory
+      String directory = (await getExternalStorageDirectory())!.path;
+
+      // Define the filename for the downloaded Excel file
+      String fileName = 'MenuList.csv';
+
+      // Read the file from the app's assets
+      ByteData data = await rootBundle.load('assets/MenuList.csv');
+
+      // Write the file to the device's local storage
+      File file = File('$directory/$fileName');
+      await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
+
+      return file;
     }
 
     double width = MediaQuery.of(context).size.width;
@@ -434,7 +438,11 @@ class _SettingsPageState extends State<SettingsPage> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () async {
+                                  File file = await savePrebuiltExcelFile();
+                                  String path = file.path;
+                                  bool launched = await launch(path, forceSafariVC: false);
+                                },
                                 child: Container(
                                   width: 60,
                                   height: 60,
@@ -451,14 +459,14 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Icon(
-                                    Icons.save_outlined,
+                                    Icons.cloud_download_outlined,
                                     color: Colors.white,
                                     size: 30,
                                   ),
                                 ),
                               ),
                               Text(
-                                'Download',
+                                'Download Template',
                                 style: TextStyle(
                                   fontFamily: 'Open Sans',
                                 ),
