@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:buybyeq/screens/resturabtdetail.dart';
+import 'package:buybyeq/screens/restauratdetail.dart';
 import 'package:buybyeq/screens/rolepage.dart';
 import 'package:buybyeq/screens/updateresturant.dart';
 import 'package:buybyeq/screens/userspage.dart';
