@@ -1,4 +1,4 @@
-import 'package:buybyeq/database/resturantdetail.dart';
+import 'package:buybyeq/database/resturantmodel.dart';
 import 'package:buybyeq/database/rolemodel.dart';
 import 'package:buybyeq/database/usemodel.dart';
 import 'catagorymodel.dart';
@@ -64,7 +64,7 @@ class MenuCategoryTableCreate {
   static final CREATE_TABLE = '''
         CREATE TABLE MenuCategory (
           MenuCategoryId INTEGER PRIMARY KEY AUTOINCREMENT,
-          MenuCategoryName VARCHAR(100) ,
+          MenuCategoryName VARCHAR(100) UNIQUE,
           Description TEXT ,
           IsActive BIT,
           UpdatedBy INTEGER,
@@ -310,6 +310,11 @@ class RestaurantTableCreate {
           FOREIGN KEY(UpdatedBy) REFERENCES User(UserId)
           )
         ''';
+
+  static String selectallresturants() {
+    return 'select * from Restaurant;';
+  }
+
   static String addresturant(Resturant x) {
     return '''
     insert into Restaurant (RestaurantName,PhoneNo,Email,Address,GSTNumber,CGST,SGST,PanNumber,Image)
