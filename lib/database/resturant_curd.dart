@@ -38,7 +38,7 @@ class Resturantcurdmap {
   Future<List<Resturant>> selectall() async {
     try {
       Database db = await _getDatabase();
-      List<Map> data = await db.rawQuery(MenuItemTableCreate.selectallmenus());
+      List<Map> data = await db.rawQuery(RestaurantTableCreate.selectallresturants());
       List<Resturant> x = Resturant.fromSQLiteList(data);
       return x;
     } catch (error) {

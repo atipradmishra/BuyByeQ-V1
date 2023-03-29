@@ -25,16 +25,26 @@ class Resturant {
   });
 
   factory Resturant.fromSQLite(Map map) {
-    return Resturant(RestaurantID: map['RestaurantID'],RestaurantName: map['RestaurantName'], PhoneNo: map['PhoneNo'], Email: map['Email'], Address: map['Address'], GSTNumber: map['GSTNumber'], PanNumber: map['PanNumber'], Image: map['Image'], CGST: map['CGSTNumber'], SGST: map['SGSTNumber']
+    return Resturant(
+        RestaurantID: map['RestaurantID'],
+        RestaurantName: map['RestaurantName'],
+        PhoneNo: map['PhoneNo'],
+        Email: map['Email'],
+        Address: map['Address'],
+        GSTNumber: map['GSTNumber'],
+        PanNumber: map['PanNumber'],
+        Image: map['Image'],
+        CGST: map['CGSTNumber'],
+        SGST: map['SGSTNumber']
     );
   }
 
   static List<Resturant> fromSQLiteList(List<Map> listMap) {
-    List<Resturant> menus = [];
+    List<Resturant> x = [];
     for (Map item in listMap) {
-      menus.add(Resturant.fromSQLite(item));
+      x.add(Resturant.fromSQLite(item));
     }
-    return menus;
+    return x;
   }
 
 
