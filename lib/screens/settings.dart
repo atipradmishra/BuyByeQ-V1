@@ -1,21 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:buybyeq/screens/resturabtdetail.dart';
+import 'dart:typed_data';
+import 'package:buybyeq/screens/restauratdetail.dart';
 import 'package:buybyeq/screens/rolepage.dart';
+import 'package:buybyeq/screens/updateresturant.dart';
 import 'package:buybyeq/screens/userspage.dart';
-import 'package:buybyeq/screens/xlsuplode.dart';
 import 'package:csv/csv.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:buybyeq/common/appBar/apbar.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../common/drawer/custom_drawer.dart';
-import '../database/catagorymodel.dart';
-import '../database/category_curd.dart';
 import '../database/connections.dart';
+import '../database/resturant_curd.dart';
+import '../database/resturantdetail.dart';
 import '../settings/settings.dart';
 import 'categorypage.dart';
 import 'menupage.dart';
@@ -31,26 +35,29 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
 
-  List<MenuCategory> category = [];
-  Categorycurdmap _categorytablemap = Categorycurdmap();
-  void selectallcategories() async {
+  List<Resturant> resturants = [];
+  Resturantcurdmap _resturanttablemap = Resturantcurdmap();
+  Resturant x = Resturant.empty();
+
+  void selectallrest() async {
     try {
-      List<MenuCategory> data = await _categorytablemap.selectall();
-      category.clear();
-      category.addAll(data);
+      List<Resturant> data = await _resturanttablemap.selectall();
+      resturants.clear();
+      resturants.addAll(data);
       setState(() {});
     } catch (error) {
-      print('Error fetching Categories');
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Error fetching Resturants')));
     }
   }
 
+  @override
   void initState() {
-    selectallcategories();
+    selectallrest();
     super.initState();
   }
-  @override
-  Widget build(BuildContext context) {
 
+  Widget build(BuildContext context) {
     List<List<dynamic>> _data = [];
     String? filePath;
     ConnectionSQLiteService _connection = ConnectionSQLiteService.instance;
@@ -72,7 +79,6 @@ class _SettingsPageState extends State<SettingsPage> {
       if (result == null) return;
       // we will log the name, size and path of the
       // first picked file (if multiple are selected)
-      print(result.files.first.name);
       filePath = result.files.first.path!;
 
       final input = File(filePath!).openRead();
@@ -80,26 +86,25 @@ class _SettingsPageState extends State<SettingsPage> {
           .transform(utf8.decoder)
           .transform(const CsvToListConverter())
           .toList();
-      print(fields);
 
       await db.transaction((txn) async {
-        for (final row in fields) {
-          var value_to_check = row[4];
+        for (final row in fields.skip(1)) {
           await txn.rawQuery(
               '''INSERT INTO MenuCategory (MenuCategoryName) VALUES(?)
               ON CONFLICT (MenuCategoryName) DO NOTHING;
               ''',
-            [row[4]]
+              [row[4]]
           );
           await txn.rawInsert(
               'INSERT INTO MenuItem (MenuItemName,Type,DiscountPercentage,Price) VALUES(?, ?,?, ?)',
               [row[0].toString(), row[1].toString().toLowerCase(),row[2],row[3]]
           );
-          // await txn.rawInsert(
-          //     '''INSERT INTO ItemCategoryMapping (MenuItemId)
-          //     SELECT MenuItemId FROM MenuItem
-          //     WHERE MenuItemName == ${row[0]};
+          // await txn.rawQuery(
+          //     '''
+          //     INSERT INTO ItemCategoryMapping (MenuItemId)
+          //     VALUES ((SELECT MenuItemId FROM MenuItem WHERE MenuItemName = ${row[0].toString()})
           //    ''',
+          //   [row[4],row[0]]
           // );
         }
       });
@@ -107,6 +112,23 @@ class _SettingsPageState extends State<SettingsPage> {
       setState(() {
         _data = fields;
       });
+    }
+
+    Future<File> savePrebuiltExcelFile() async {
+      // Get the path to the app's local storage directory
+      String directory = (await getExternalStorageDirectory())!.path;
+
+      // Define the filename for the downloaded Excel file
+      String fileName = 'MenuList.csv';
+
+      // Read the file from the app's assets
+      ByteData data = await rootBundle.load('assets/MenuList.csv');
+
+      // Write the file to the device's local storage
+      File file = File('$directory/$fileName');
+      await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
+
+      return file;
     }
 
     double width = MediaQuery.of(context).size.width;
@@ -378,8 +400,13 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       GestureDetector(
                         onTap: (){
-                          Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => ResturantDetail()));
+                          if (resturants.isEmpty) {
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (context) => ResturantDetailUpdate())).then((value) => selectallrest());;
+                          } else {
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (context) => ResturantDetail()));
+                          }
                         },
                         child: Container(
                           width: 160,
@@ -407,7 +434,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                                   child: Text(
-                                    'Resturant Details',
+                                    'Restaurant Details',
                                     style: TextStyle(
                                       color: Color(0xFF101213),
                                       fontSize: 16,
@@ -434,7 +461,11 @@ class _SettingsPageState extends State<SettingsPage> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () async {
+                                  File file = await savePrebuiltExcelFile();
+                                  String path = file.path;
+                                  bool launched = await launch(path, forceSafariVC: false);
+                                },
                                 child: Container(
                                   width: 60,
                                   height: 60,
@@ -451,14 +482,14 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Icon(
-                                    Icons.save_outlined,
+                                    Icons.cloud_download_outlined,
                                     color: Colors.white,
                                     size: 30,
                                   ),
                                 ),
                               ),
                               Text(
-                                'Download',
+                                'Download Template',
                                 style: TextStyle(
                                   fontFamily: 'Open Sans',
                                 ),
@@ -475,23 +506,23 @@ class _SettingsPageState extends State<SettingsPage> {
                                 late final Map<Permission,PermissionStatus> statusess;
                                 if (androidInfo.version.sdkInt! <= 32){
                                   statusess = await [
-                                  Permission.storage
-                                ].request();
+                                    Permission.storage
+                                  ].request();
                                 } else {
-                                statusess = await [
-                                Permission.photos
-                                ].request();
+                                  statusess = await [
+                                    Permission.photos
+                                  ].request();
                                 }
                                 var allAccepted = true;
                                 statusess.forEach((permission, status) {
-                                if (status != PermissionStatus.granted){
-                                allAccepted = false;
-                                }
+                                  if (status != PermissionStatus.granted){
+                                    allAccepted = false;
+                                  }
                                 });
                                 if (allAccepted){
-                                _pickFile();
+                                  _pickFile();
                                 } else {
-                                await  openAppSettings();
+                                  await  openAppSettings();
                                 }
                               },
                               child: Container(
