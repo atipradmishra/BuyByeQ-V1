@@ -19,7 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../common/drawer/custom_drawer.dart';
 import '../database/connections.dart';
 import '../database/resturant_curd.dart';
-import '../database/resturantdetail.dart';
+import '../database/resturantmodel.dart';
 import '../settings/settings.dart';
 import 'categorypage.dart';
 import 'menupage.dart';
@@ -70,8 +70,8 @@ class _SettingsPageState extends State<SettingsPage> {
       Database db = await _getDatabase();
 
       final result = await FilePicker.platform.pickFiles(
-        type: FileType.any,
-        // allowedExtensions: ['csv'],
+        type: FileType.custom,
+        allowedExtensions: ['csv'],
         allowMultiple: false,
       );
 
@@ -101,10 +101,10 @@ class _SettingsPageState extends State<SettingsPage> {
           );
           // await txn.rawQuery(
           //     '''
-          //     INSERT INTO ItemCategoryMapping (MenuItemId)
-          //     VALUES ((SELECT MenuItemId FROM MenuItem WHERE MenuItemName = ${row[0].toString()})
+          //     INSERT INTO ItemCategoryMapping (MenuItemId,MenuCategoryId)
+          //     VALUES (?,?)
           //    ''',
-          //   [row[4],row[0]]
+          //   [7,5]
           // );
         }
       });
